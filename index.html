@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.1.7">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.1.10">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -101,12 +101,17 @@
 <!-- Content sections cleared -->
 
 
+</body>section>
+
+<section class="brand-interactive-lab" style="margin-top: 5rem;">
+  <canvas id="brand-canvas"></canvas>
+</section>
+
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-10">
-        <div class="glass-card particle-container">
-          <div id="about-particles"></div>
+        <div class="glass-card">
           <div class="card-content-overlay">
             <div class="nano-3d-chip"><i class="fas fa-info-circle"></i></div>
             <h2 class="title is-3" style="color: #1d1d1f; margin-bottom: 1.5rem;">关于我们</h2>
@@ -124,26 +129,6 @@
     </div>
   </div>
 </section>
-
-<script>
-  particlesJS("about-particles", {
-    "particles": {
-      "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-      "color": { "value": "#0071e3" },
-      "shape": { "type": "circle" },
-      "opacity": { "value": 0.1, "random": false },
-      "size": { "value": 3, "random": true },
-      "line_linked": { "enable": true, "distance": 150, "color": "#0071e3", "opacity": 0.05, "width": 1 },
-      "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-    },
-    "interactivity": {
-      "detect_on": "canvas",
-      "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-      "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.2 } }, "push": { "particles_nb": 4 } }
-    },
-    "retina_detect": true
-  });
-</script>
 <section class="section" id="expertise">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
