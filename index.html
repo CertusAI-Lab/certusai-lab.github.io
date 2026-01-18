@@ -193,7 +193,7 @@
   <canvas id="brand-canvas"></canvas>
 </section>
 
-<footer class="footer" style="padding: 3rem 1.5rem 6rem;">
+<footer class="footer" style="padding: 2rem 1.5rem 6rem;">
   <div class="container">
     <div class="content has-text-centered">
       <p style="color: #86868b; font-size: 0.9rem;">
@@ -209,13 +209,13 @@
     const ctx = canvas.getContext('2d');
     let width, height, particles = [];
     const dpr = window.devicePixelRatio || 1;
-    let mouse = { x: -1000, y: -1000, radius: 80 };
+    let mouse = { x: -1000, y: -1000, radius: 100 }; // 增大交互半径
 
     function init() {
       // 这里的尺寸必须考虑浏览器缩放
       const rect = canvas.parentNode.getBoundingClientRect();
       width = rect.width;
-      height = 140; 
+      height = 220; 
       
       canvas.width = width * dpr;
       canvas.height = height * dpr;
@@ -230,26 +230,27 @@
       tCanvas.height = height;
       tCtx.fillStyle = 'black';
       // 使用更优雅的 Apple 系统字体
-      tCtx.font = "bold 52px Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+      // 放大字号至 100px 并通过字母间距增加宽度
+      tCtx.font = "bold 100px Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
       tCtx.textAlign = 'center';
       tCtx.textBaseline = 'middle';
       tCtx.fillText('CERTUS AI', width / 2, height / 2);
       
       const imgData = tCtx.getImageData(0, 0, width, height).data;
-      const skip = 3; // 提升密度
+      const skip = 4; // 稍微调大步长以平衡性能与大尺寸
       
       for (let y = 0; y < height; y += skip) {
         for (let x = 0; x < width; x += skip) {
           const alpha = imgData[(y * width + x) * 4 + 3];
           if (alpha > 128) {
             particles.push({
-              x: x + (Math.random() - 0.5) * 2, 
-              y: y + (Math.random() - 0.5) * 2,
+              x: x + (Math.random() - 0.5) * 3, 
+              y: y + (Math.random() - 0.5) * 3,
               baseX: x, 
               baseY: y,
               vx: 0, 
               vy: 0,
-              size: Math.random() * 1.5 + 0.8,
+              size: Math.random() * 2 + 1, // 稍微放大粒子尺寸
               a: 0.4 + Math.random() * 0.4
             });
           }
