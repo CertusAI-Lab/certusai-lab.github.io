@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.1.19">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.1.20">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -104,10 +104,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-10">
-        <div class="glass-card integrated-lab">
-          <!-- 点阵 Logo 动态背景层 -->
-          <canvas id="brand-canvas"></canvas>
-          
+        <div class="glass-card">
           <div class="card-content-overlay">
             <div class="nano-3d-chip"><i class="fas fa-info-circle"></i></div>
             <h2 class="title is-3" style="color: #1d1d1f; margin-bottom: 1.5rem;">关于我们</h2>
@@ -185,6 +182,10 @@
     </div>
   </div>
 </footer>
+
+<section class="brand-interactive-lab">
+  <canvas id="brand-canvas"></canvas>
+</section>
 
 <script>
   (function() {
