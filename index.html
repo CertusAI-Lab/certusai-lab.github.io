@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.1.12">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.1.14">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -216,15 +216,15 @@
       tCanvas.height = height;
       
       const logoAspect = logoImg.width / logoImg.height;
-      let targetW = width * 0.85;
+      let targetW = width * 0.5; // 缩小至50%，确保球体+文字完整显示
       let targetH = targetW / logoAspect;
       
-      if (targetH > height * 0.75) {
-          targetH = height * 0.75;
+      if (targetH > height * 0.5) {
+          targetH = height * 0.5;
           targetW = targetH * logoAspect;
       }
       
-      const drawX = (width - targetW) / 2;
+      const drawX = (width - targetW) / 2 + width * 0.15; // 向右偏移，避开左侧文案
       const drawY = (height - targetH) / 2;
       
       tCtx.drawImage(logoImg, drawX, drawY, targetW, targetH);
