@@ -214,7 +214,7 @@ body {
 .brand-interactive-lab {
   position: relative;
   width: 100%;
-  height: 220px; /* 增大高度，提升张力 */
+  height: 280px; /* 进一步增大，适配完整 Logo 比例 */
   background: #ffffff;
   overflow: hidden;
   display: flex;
