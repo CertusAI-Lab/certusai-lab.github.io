@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.1.15">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.1.16">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -216,20 +216,21 @@
       tCanvas.height = height;
       
       const logoAspect = logoImg.width / logoImg.height;
-      let targetW = width * 0.5; // 缩小至50%，确保球体+文字完整显示
-      let targetH = targetW / logoAspect;
+      // 保持Logo原有比例，适当缩放
+      let targetH = height * 0.7;
+      let targetW = targetH * logoAspect;
       
-      if (targetH > height * 0.5) {
-          targetH = height * 0.5;
-          targetW = targetH * logoAspect;
+      if (targetW > width * 0.6) {
+          targetW = width * 0.6;
+          targetH = targetW / logoAspect;
       }
       
-      const drawX = (width - targetW) / 2 + width * 0.15; // 向右偏移，避开左侧文案
+      const drawX = (width - targetW) / 2 + width * 0.2; // 右移避开文案
       const drawY = (height - targetH) / 2;
       
       tCtx.drawImage(logoImg, drawX, drawY, targetW, targetH);
       const imgData = tCtx.getImageData(0, 0, width, height).data;
-      const skip = 3; 
+      const skip = 2; // 更密集的采样
       
       for (let y = 0; y < height; y += skip) {
         for (let x = 0; x < width; x += skip) {
@@ -238,15 +239,15 @@
           const g = imgData[i + 1];
           const b = imgData[i + 2];
           const alpha = imgData[i + 3];
-          if (alpha > 40) {
+          if (alpha > 30) {
             particles.push({
-              x: x + (Math.random() - 0.5) * 6, 
-              y: y + (Math.random() - 0.5) * 6,
+              x: x + (Math.random() - 0.5) * 2, 
+              y: y + (Math.random() - 0.5) * 2,
               baseX: x, baseY: y,
               vx: 0, vy: 0,
-              size: Math.random() * 1.5 + 1.2,
+              size: Math.random() * 0.8 + 0.8, // 更小的粒子
               r: r, g: g, b: b,
-              a: (alpha / 255) * 0.7
+              a: (alpha / 255) * 0.85 // 更高透明度
             });
           }
         }
