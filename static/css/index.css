@@ -210,25 +210,25 @@ body {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
 }
 
-/* 高阶交互实验室 (Integrated Liquid Background) */
-.glass-card.integrated-lab {
+/* 高阶交互实验室 (Independent Footer Lab) */
+.brand-interactive-lab {
   position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 300px;
+  margin: 4rem auto 0;
+  background: transparent;
   overflow: hidden;
-  min-height: 500px; /* 增加最小高度，确保 Logo 有发挥空间 */
   display: flex;
   align-items: center;
-  z-index: 1;
+  justify-content: center;
 }
 
 #brand-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  z-index: -1; /* 至于文字下方 */
-  background: transparent;
-  pointer-events: none; /* 让鼠标事件穿透到卡片 */
+  touch-action: none;
 }
 
 .integrated-lab .card-content-overlay {
@@ -236,11 +236,6 @@ body {
   z-index: 2;
   pointer-events: auto;
   width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* 实现全幅内容居中 */
-  text-align: center;      /* 文字同步居中 */
 }
 
 .glitch-text::before,
