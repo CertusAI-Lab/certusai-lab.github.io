@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.1.2">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.1.4">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -189,26 +189,99 @@
   </div>
 </section>
 
-
-<!-- Technical details cleared -->
-
+<section class="brand-interactive-lab">
+  <canvas id="brand-canvas"></canvas>
+  <div class="glitch-wrapper">
+    <div class="glitch-text" data-text="FUTURE SECURED">FUTURE SECURED</div>
+  </div>
+</section>
 
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            &copy; 2026 Certus AI (确信科技). 版权所有。
-          </p>
-        </div>
-      </div>
-    </div>
-      </div>
+      <p>
+        &copy; 2026 Certus AI (确信科技). 版权所有。
+      </p>
     </div>
   </div>
 </footer>
+
+<script>
+  // 3D 粒子球引擎 (Brand Custom)
+  (function() {
+    const canvas = document.getElementById('brand-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width, height, particles = [];
+    const particleCount = 2000;
+    const sphereRadius = 180;
+    let mouse = { x: -1000, y: -1000 };
+
+    function init() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = 600;
+      particles = [];
+      for(let i=0; i<particleCount; i++) {
+        const phi = Math.acos(-1 + (2 * i) / particleCount);
+        const theta = Math.sqrt(particleCount * Math.PI) * phi;
+        particles.push({
+          ox: sphereRadius * Math.cos(theta) * Math.sin(phi),
+          oy: sphereRadius * Math.sin(theta) * Math.sin(phi),
+          oz: sphereRadius * Math.cos(phi)
+        });
+      }
+    }
+
+    window.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left - width/2;
+      mouse.y = e.clientY - rect.top - height/2;
+    });
+
+    let angle = 0;
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      angle += 0.003;
+      
+      ctx.save();
+      ctx.translate(width/2, height/2);
+      
+      particles.forEach(p => {
+        // 3D 旋转
+        let x = p.ox * Math.cos(angle) - p.oz * Math.sin(angle);
+        let z = p.ox * Math.sin(angle) + p.oz * Math.cos(angle);
+        let y = p.oy;
+
+        // 鼠标感应形变
+        const dx = mouse.x - x;
+        const dy = mouse.y - y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 120) {
+          const force = (120 - dist) / 120;
+          x -= dx * force * 0.6;
+          y -= dy * force * 0.6;
+        }
+
+        const scale = 500 / (500 + z);
+        const px = x * scale;
+        const py = y * scale;
+        const alpha = (z + sphereRadius) / (2 * sphereRadius);
+        
+        ctx.fillStyle = `rgba(0, 113, 227, ${0.15 + alpha * 0.45})`;
+        ctx.beginPath();
+        ctx.arc(px, py, 1.2 * scale, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      
+      ctx.restore();
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+    window.addEventListener('resize', init);
+  })();
+</script>
 
 </body>
 </html>
