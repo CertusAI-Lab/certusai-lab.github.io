@@ -29,10 +29,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.0.8">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.0.9">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
@@ -103,22 +104,45 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-10">
-        <div class="glass-card">
-          <div class="nano-3d-chip"><i class="fas fa-fingerprint"></i></div>
-          <h2 class="title is-3" style="color: #1d1d1f; margin-bottom: 1.5rem;">关于我们</h2>
-          <div class="content is-size-5" style="color: var(--text-dim); line-height: 1.8;">
-            <p>
-              Certus AI (确信科技) 是国内首家专注于法律大模型安全边界的第三方评估机构。我们致力于为 AI 与法律的深度融合提供安全锚点，确保智能合规，防范算法偏差。
-            </p>
-            <p>
-              我们提出了 <strong>L7 对抗性评估框架</strong>，涵盖了从基础合规化到高阶安全性的全方位风险评估体系。
-            </p>
+        <div class="glass-card particle-container">
+          <div id="about-particles"></div>
+          <div class="card-content-overlay">
+            <div class="nano-3d-chip"><i class="fas fa-fingerprint"></i></div>
+            <h2 class="title is-3" style="color: #1d1d1f; margin-bottom: 1.5rem;">关于我们</h2>
+            <div class="content is-size-5" style="color: var(--text-dim); line-height: 1.8;">
+              <p>
+                Certus AI (确信科技) 是国内首家专注于法律大模型安全边界的第三方评估机构。我们致力于为 AI 与法律的深度融合提供安全锚点，确保智能合规，防范算法偏差。
+              </p>
+              <p>
+                我们提出了 <strong>L7 对抗性评估框架</strong>，涵盖了从基础合规化到高阶安全性的全方位风险评估体系。
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  particlesJS("about-particles", {
+    "particles": {
+      "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+      "color": { "value": "#0071e3" },
+      "shape": { "type": "circle" },
+      "opacity": { "value": 0.1, "random": false },
+      "size": { "value": 3, "random": true },
+      "line_linked": { "enable": true, "distance": 150, "color": "#0071e3", "opacity": 0.05, "width": 1 },
+      "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+      "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.2 } }, "push": { "particles_nb": 4 } }
+    },
+    "retina_detect": true
+  });
+</script>
 
 <section class="section" id="expertise">
   <div class="container is-max-desktop">
