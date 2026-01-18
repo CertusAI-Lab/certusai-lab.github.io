@@ -210,25 +210,32 @@ body {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
 }
 
-/* 高阶交互实验室 (Refined Particle Art) */
-.brand-interactive-lab {
+/* 高阶交互实验室 (Integrated Liquid Background) */
+.glass-card.integrated-lab {
   position: relative;
-  width: 100%;
-  height: 280px; /* 进一步增大，适配完整 Logo 比例 */
-  background: #ffffff;
   overflow: hidden;
+  min-height: 450px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-top: 1px solid rgba(0,0,0,0.03);
-  margin-top: 2rem;
+  z-index: 1;
 }
 
 #brand-canvas {
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  touch-action: none;
+  z-index: -1; /* 至于文字下方 */
+  background: transparent;
+  pointer-events: none; /* 让鼠标事件穿透到卡片 */
+}
+
+.integrated-lab .card-content-overlay {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+  width: 100%;
 }
 
 .glitch-text::before,

@@ -184,23 +184,25 @@
 <script>
   (function() {
     const canvas = document.getElementById('brand-canvas');
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let width, height, particles = [];
     const dpr = window.devicePixelRatio || 1;
-    let mouse = { x: -1000, y: -1000, radius: 120 };
+    let mouse = { x: -1000, y: -1000, radius: 100 };
 
     const logoImg = new Image();
     logoImg.src = "./static/images/certusai.png";
-    if (logoImg.complete) {
-      init();
-    } else {
-      logoImg.onload = init;
-    }
+    logoImg.onload = () => {
+        window.addEventListener('resize', init);
+        init();
+        animate();
+    };
 
     function init() {
+      // 这里的尺寸对应 glass-card 容器
       const rect = canvas.parentNode.getBoundingClientRect();
       width = rect.width;
-      height = 280; 
+      height = rect.height; 
       
       canvas.width = width * dpr;
       canvas.height = height * dpr;
@@ -210,18 +212,23 @@
       
       const tCanvas = document.createElement('canvas');
       const tCtx = tCanvas.getContext('2d');
-      // 计算图片缩放比例以居中显示
-      const logoAspect = logoImg.width / logoImg.height;
-      const targetHeight = 160; // 核心内容高度
-      const targetWidth = targetHeight * logoAspect;
-      
       tCanvas.width = width;
       tCanvas.height = height;
       
-      const drawX = (width - targetWidth) / 2;
-      const drawY = (height - targetHeight) / 2;
+      // 智能缩放 Logo 以匹配背景
+      const logoAspect = logoImg.width / logoImg.height;
+      let targetW = width * 0.7; // 占据卡片 70% 宽度
+      let targetH = targetW / logoAspect;
       
-      tCtx.drawImage(logoImg, drawX, drawY, targetWidth, targetHeight);
+      if (targetH > height * 0.6) {
+          targetH = height * 0.6;
+          targetW = targetH * logoAspect;
+      }
+      
+      const drawX = (width - targetW) / 2 + 100; // 稍微向右偏移，避开文字区
+      const drawY = (height - targetH) / 2;
+      
+      tCtx.drawImage(logoImg, drawX, drawY, targetW, targetH);
       
       const imgData = tCtx.getImageData(0, 0, width, height).data;
       const skip = 3; 
@@ -229,22 +236,21 @@
       for (let y = 0; y < height; y += skip) {
         for (let x = 0; x < width; x += skip) {
           const alpha = imgData[(y * width + x) * 4 + 3];
-          if (alpha > 50) {
+          if (alpha > 30) { // 降低阈值，捕捉细微文字
             particles.push({
-              x: x + (Math.random() - 0.5) * 5, 
-              y: y + (Math.random() - 0.5) * 5,
-              baseX: x, 
-              baseY: y,
-              vx: 0, 
-              vy: 0,
+              x: x + (Math.random() - 0.5) * 4, 
+              y: y + (Math.random() - 0.5) * 4,
+              baseX: x, baseY: y,
+              vx: 0, vy: 0,
               size: Math.random() * 1.5 + 1,
-              a: (alpha / 255) * 0.8 // 保留 Logo 原有的透明度特征
+              a: (alpha / 255) * 0.35 // 作为背景，透明度调低
             });
           }
         }
       }
     }
 
+    // 监听全页鼠标，使交互更同步
     window.addEventListener('mousemove', e => {
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
@@ -263,18 +269,18 @@
         if (dist < mouse.radius) {
           const force = (mouse.radius - dist) / mouse.radius;
           const angle = Math.atan2(dy, dx);
-          p.vx -= Math.cos(angle) * force * 1.5;
-          p.vy -= Math.sin(angle) * force * 1.5;
+          p.vx -= Math.cos(angle) * force * 1.8;
+          p.vy -= Math.sin(angle) * force * 1.8;
         }
         
-        p.vx += (p.baseX - p.x) * 0.09;
-        p.vy += (p.baseY - p.y) * 0.09;
-        p.vx *= 0.85;
-        p.vy *= 0.85;
+        p.vx += (p.baseX - p.x) * 0.08;
+        p.vy += (p.baseY - p.y) * 0.08;
+        p.vx *= 0.88;
+        p.vy *= 0.88;
         p.x += p.vx;
         p.y += p.vy;
         
-        const jitter = Math.sin(time + p.baseX * 0.5) * 0.2;
+        const jitter = Math.sin(time + p.baseX) * 0.25;
         ctx.fillStyle = `rgba(0, 113, 227, ${p.a})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y + jitter, p.size, 0, Math.PI * 2);
@@ -283,9 +289,6 @@
       
       requestAnimationFrame(animate);
     }
-
-    animate();
-    window.addEventListener('resize', init);
   })();
 </script>
 
