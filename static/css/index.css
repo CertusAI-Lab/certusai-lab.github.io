@@ -82,7 +82,7 @@ body {
 
 /* Hero 区域增强 */
 .hero.is-pro-max {
-  min-height: 75vh;
+  min-height: 100vh; /* 首屏全覆盖 */
   display: flex;
   align-items: center;
   justify-content: center;
