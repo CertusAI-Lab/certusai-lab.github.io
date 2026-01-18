@@ -100,16 +100,14 @@
 
 <!-- Content sections cleared -->
 
-
-<section class="brand-interactive-lab" style="margin-top: 5rem;">
-  <canvas id="brand-canvas"></canvas>
-</section>
-
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-10">
-        <div class="glass-card">
+        <div class="glass-card integrated-lab">
+          <!-- 点阵 Logo 动态背景 -->
+          <canvas id="brand-canvas"></canvas>
+          
           <div class="card-content-overlay">
             <div class="nano-3d-chip"><i class="fas fa-info-circle"></i></div>
             <h2 class="title is-3" style="color: #1d1d1f; margin-bottom: 1.5rem;">关于我们</h2>
@@ -225,7 +223,7 @@
           targetW = targetH * logoAspect;
       }
       
-      const drawX = (width - targetW) / 2 + 100; // 稍微向右偏移，避开文字区
+      const drawX = (width - targetW) / 2;
       const drawY = (height - targetH) / 2;
       
       tCtx.drawImage(logoImg, drawX, drawY, targetW, targetH);
