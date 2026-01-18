@@ -210,31 +210,90 @@ body {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
 }
 
-/* 粒子背景背景增强 */
-.particle-container {
+/* 高阶交互实验室 (Trae + Logo Style) */
+.brand-interactive-lab {
   position: relative;
-  z-index: 1;
-  background: white !important;
+  width: 100%;
+  height: 600px;
+  background: #ffffff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(0,0,0,0.03);
+  margin-top: 4rem;
 }
 
-#about-particles {
+#brand-canvas {
   position: absolute;
-  width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
-  z-index: 0;
-  pointer-events: auto; /* 允许粒子捕捉鼠标事件 */
-}
-
-.card-content-overlay {
-  position: relative;
+  width: 100%;
+  height: 100%;
   z-index: 1;
-  pointer-events: none; /* 穿透层，以便下方粒子能感应鼠标 */
 }
 
-.card-content-overlay * {
-  pointer-events: auto; /* 恢复文字内容的交互 */
+.glitch-wrapper {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  pointer-events: none;
+}
+
+.glitch-text {
+  font-size: 8rem;
+  font-weight: 800;
+  color: #1d1d1f;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  position: relative;
+  display: inline-block;
+  pointer-events: auto;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #0071e3;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 #00d4ff;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(31px, 9999px, 94px, 0); transform: skew(0.85deg); }
+  5% { clip: rect(70px, 9999px, 71px, 0); transform: skew(0.85deg); }
+  10% { clip: rect(29px, 9999px, 83px, 0); transform: skew(0.85deg); }
+  /* ... more frames ... */
+  100% { clip: rect(67px, 9999px, 62px, 0); transform: skew(0.85deg); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(65px, 9999px, 70px, 0); transform: skew(0.55deg); }
+  100% { clip: rect(10px, 9999px, 100px, 0); transform: skew(0.55deg); }
+}
+
+.glitch-text:hover::before {
+  animation: glitch-anim 0.2s infinite linear alternate-reverse;
+}
+.glitch-text:hover::after {
+  animation: glitch-anim2 0.2s infinite linear alternate-reverse;
 }
 
 .l7-level {
