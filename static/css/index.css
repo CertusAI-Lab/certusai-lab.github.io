@@ -210,18 +210,18 @@ body {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
 }
 
-/* 高阶交互实验室 (Trae + Logo Style) */
+/* 高阶交互实验室 (Pure Particle Style) */
 .brand-interactive-lab {
   position: relative;
   width: 100%;
-  height: 600px;
+  height: 120px; /* 压缩为一行文字高度 */
   background: #ffffff;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   border-top: 1px solid rgba(0,0,0,0.03);
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 #brand-canvas {
@@ -230,25 +230,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-}
-
-.glitch-wrapper {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  pointer-events: none;
-}
-
-.glitch-text {
-  font-size: 8rem;
-  font-weight: 800;
-  color: #1d1d1f;
-  text-transform: uppercase;
-  letter-spacing: -2px;
-  position: relative;
-  display: inline-block;
-  pointer-events: auto;
 }
 
 .glitch-text::before,

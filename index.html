@@ -191,9 +191,6 @@
 
 <section class="brand-interactive-lab">
   <canvas id="brand-canvas"></canvas>
-  <div class="glitch-wrapper">
-    <div class="glitch-text" data-text="FUTURE SECURED">FUTURE SECURED</div>
-  </div>
 </section>
 
 <footer class="footer">
@@ -207,73 +204,87 @@
 </footer>
 
 <script>
-  // 3D 粒子球引擎 (Brand Custom)
   (function() {
     const canvas = document.getElementById('brand-canvas');
-    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let width, height, particles = [];
-    const particleCount = 2000;
-    const sphereRadius = 180;
     let mouse = { x: -1000, y: -1000 };
 
     function init() {
       width = canvas.width = window.innerWidth;
-      height = canvas.height = 600;
+      height = canvas.height = 120;
       particles = [];
-      for(let i=0; i<particleCount; i++) {
-        const phi = Math.acos(-1 + (2 * i) / particleCount);
-        const theta = Math.sqrt(particleCount * Math.PI) * phi;
-        particles.push({
-          ox: sphereRadius * Math.cos(theta) * Math.sin(phi),
-          oy: sphereRadius * Math.sin(theta) * Math.sin(phi),
-          oz: sphereRadius * Math.cos(phi)
-        });
+      
+      // 文字点阵采样
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCanvas.width = width;
+      tempCanvas.height = height;
+      tempCtx.fillStyle = 'black';
+      tempCtx.font = "bold 48px Inter, -apple-system, sans-serif";
+      tempCtx.textAlign = 'center';
+      tempCtx.textBaseline = 'middle';
+      tempCtx.fillText('CERTUS AI', width / 2, height / 2);
+      
+      const imgData = tempCtx.getImageData(0, 0, width, height).data;
+      const step = 4; // 采样密度
+      
+      for (let y = 0; y < height; y += step) {
+        for (let x = 0; x < width; x += step) {
+          if (imgData[(y * width + x) * 4 + 3] > 128) {
+            particles.push({
+              x: x, y: y,
+              ox: x, oy: y,
+              vx: 0, vy: 0,
+              originalX: x, originalY: y,
+              size: Math.random() * 1.5 + 0.5
+            });
+          }
+        }
       }
     }
 
     window.addEventListener('mousemove', e => {
       const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left - width/2;
-      mouse.y = e.clientY - rect.top - height/2;
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
     });
 
-    let angle = 0;
     function animate() {
       ctx.clearRect(0, 0, width, height);
-      angle += 0.003;
-      
-      ctx.save();
-      ctx.translate(width/2, height/2);
       
       particles.forEach(p => {
-        // 3D 旋转
-        let x = p.ox * Math.cos(angle) - p.oz * Math.sin(angle);
-        let z = p.ox * Math.sin(angle) + p.oz * Math.cos(angle);
-        let y = p.oy;
-
-        // 鼠标感应形变
-        const dx = mouse.x - x;
-        const dy = mouse.y - y;
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
         const dist = Math.sqrt(dx*dx + dy*dy);
-        if(dist < 120) {
-          const force = (120 - dist) / 120;
-          x -= dx * force * 0.6;
-          y -= dy * force * 0.6;
-        }
-
-        const scale = 500 / (500 + z);
-        const px = x * scale;
-        const py = y * scale;
-        const alpha = (z + sphereRadius) / (2 * sphereRadius);
+        const radius = 60;
         
-        ctx.fillStyle = `rgba(0, 113, 227, ${0.15 + alpha * 0.45})`;
+        if (dist < radius) {
+          const force = (radius - dist) / radius;
+          p.vx -= dx * force * 0.2;
+          p.vy -= dy * force * 0.2;
+        }
+        
+        // 弹性恢复
+        p.vx += (p.originalX - p.x) * 0.08;
+        p.vy += (p.originalY - p.y) * 0.08;
+        
+        // 摩擦力
+        p.vx *= 0.85;
+        p.vy *= 0.85;
+        
+        p.x += p.vx;
+        p.y += p.vy;
+        
+        // 律动
+        const pulse = Math.sin(Date.now() * 0.002 + p.x * 0.1) * 0.5;
+        
+        ctx.fillStyle = `rgba(0, 113, 227, ${0.4 + pulse * 0.2})`;
         ctx.beginPath();
-        ctx.arc(px, py, 1.2 * scale, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
       });
       
-      ctx.restore();
       requestAnimationFrame(animate);
     }
 
