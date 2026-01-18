@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.2.0">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.2.1">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -184,24 +184,23 @@
   <canvas id="brand-canvas"></canvas>
 </section>
 
-<!-- Hero 科技网络粒子系统 -->
+<!-- Hero 全息波浪粒子系统 (Holographic Wave) -->
 <script>
   (function() {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let width, height;
-    let particles = [];
+    let time = 0;
     const dpr = window.devicePixelRatio || 1;
     
-    // 科技蓝参数
-    const config = {
-      count: 60,
-      color: '#0071e3',  
-      dist: 120,
-      speed: 0.4
-    };
-    
+    // 波浪配置
+    const waves = [
+      { y: 0.5, amp: 80, len: 0.005, speed: 0.012, color: 'rgba(0, 113, 227, 0.08)' }, // 背景深波
+      { y: 0.52, amp: 70, len: 0.008, speed: 0.015, color: 'rgba(0, 113, 227, 0.12)' }, // 中间波
+      { y: 0.48, amp: 60, len: 0.012, speed: 0.02, color: 'rgba(0, 113, 227, 0.18)' }  // 前景亮波
+    ];
+
     const observer = new IntersectionObserver((entries) => {
         if(entries[0].isIntersecting) animate();
     });
@@ -217,45 +216,45 @@
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      
-      particles = [];
-      for(let i=0; i<config.count; i++) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * config.speed,
-          vy: (Math.random() - 0.5) * config.speed,
-          size: Math.random() * 2 + 1
-        });
-      }
     }
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
-      for(let i=0; i<particles.length; i++) {
-        let p = particles[i];
-        p.x += p.vx; p.y += p.vy;
-        if(p.x < 0 || p.x > width) p.vx *= -1;
-        if(p.y < 0 || p.y > height) p.vy *= -1;
-        
+      time++;
+      
+      waves.forEach(w => {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-        ctx.fillStyle = `rgba(0, 113, 227, 0.4)`;
+        ctx.moveTo(0, height * w.y);
+        for(let x = 0; x < width; x+=5) { // 粒度适中
+           const y = Math.sin(x * w.len + time * w.speed) * w.amp + 
+                     Math.sin(x * w.len * 0.5 + time * w.speed * 0.5) * (w.amp * 0.5);
+           ctx.lineTo(x, height * w.y + y);
+        }
+        ctx.lineTo(width, height);
+        ctx.lineTo(0, height);
+        ctx.fillStyle = w.color;
+        
+        // 增加模糊与发光感
+        ctx.shadowBlur = 0;
         ctx.fill();
         
-        for(let j=i+1; j<particles.length; j++) {
-          let p2 = particles[j];
-          let dist = Math.sqrt((p.x-p2.x)**2 + (p.y-p2.y)**2);
-          if(dist < config.dist) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 113, 227, ${0.15 * (1 - dist/config.dist)})`;
-            ctx.lineWidth = 1;
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
+        // 绘制其上方的一条细线增强科技感
+        ctx.strokeStyle = w.color.replace('0.1', '0.3').replace('0.08', '0.2');
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+      
+      // 随机浮动粒子点缀
+      const particleCount = 20;
+      ctx.fillStyle = "rgba(0, 113, 227, 0.4)";
+      for(let i=0; i<particleCount; i++) {
+        let px = (time * 0.5 + i * 150) % width;
+        let py = height * 0.5 + Math.sin(px * 0.005 + time * 0.01) * 60;
+        ctx.beginPath();
+        ctx.arc(px, py + (i%2===0?-40:40), Math.random()*1.5, 0, Math.PI*2);
+        ctx.fill();
       }
+
       requestAnimationFrame(animate);
     }
   })();
