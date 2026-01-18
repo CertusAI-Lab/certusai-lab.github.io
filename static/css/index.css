@@ -123,14 +123,15 @@ body {
 #hero-particle-container {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 50%; /* 占据右半部分 */
+  left: 0;
+  width: 100%; /* 全屏覆盖 */
   height: 100%;
   z-index: 0;
   pointer-events: none;
   background: transparent;
-  mask-image: linear-gradient(to right, transparent, black 20%);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 20%);
+  /* 智能遮罩：左侧文案区重遮挡，右侧轻遮挡，中间过渡平滑 */
+  mask-image: radial-gradient(circle at 15% 50%, transparent 0%, black 60%);
+  -webkit-mask-image: radial-gradient(circle at 15% 50%, transparent 0%, black 60%);
 }
 
 #hero-canvas {
