@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.2.17">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.2.18">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -295,10 +295,10 @@
       tCanvas.height = height;
       
       const logoAspect = logoImg.width / logoImg.height;
-      let targetW = width * 0.95; // 铺满屏幕宽度
+      let targetW = width; // 100% 铺满屏幕宽度
       let targetH = targetW / logoAspect;
-      if (targetH > height * 0.9) {
-          targetH = height * 0.9;
+      if (targetH > height) {
+          targetH = height;
           targetW = targetH * logoAspect;
       }
       
