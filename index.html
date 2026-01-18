@@ -101,8 +101,6 @@
 <!-- Content sections cleared -->
 
 
-</body>section>
-
 <section class="brand-interactive-lab" style="margin-top: 5rem;">
   <canvas id="brand-canvas"></canvas>
 </section>
@@ -193,7 +191,11 @@
 
     const logoImg = new Image();
     logoImg.src = "./static/images/certusai.png";
-    logoImg.onload = init;
+    if (logoImg.complete) {
+      init();
+    } else {
+      logoImg.onload = init;
+    }
 
     function init() {
       const rect = canvas.parentNode.getBoundingClientRect();
