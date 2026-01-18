@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.2.1">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.2.2">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -194,11 +194,11 @@
     let time = 0;
     const dpr = window.devicePixelRatio || 1;
     
-    // 波浪配置
+    // 波浪配置 - 轻量化通透版
     const waves = [
-      { y: 0.5, amp: 80, len: 0.005, speed: 0.012, color: 'rgba(0, 113, 227, 0.08)' }, // 背景深波
-      { y: 0.52, amp: 70, len: 0.008, speed: 0.015, color: 'rgba(0, 113, 227, 0.12)' }, // 中间波
-      { y: 0.48, amp: 60, len: 0.012, speed: 0.02, color: 'rgba(0, 113, 227, 0.18)' }  // 前景亮波
+      { y: 0.5, amp: 80, len: 0.005, speed: 0.012, color: 'rgba(0, 113, 227, 0.03)' }, // 极淡背景
+      { y: 0.52, amp: 70, len: 0.008, speed: 0.015, color: 'rgba(0, 113, 227, 0.05)' }, // 淡雅中层
+      { y: 0.48, amp: 60, len: 0.012, speed: 0.02, color: 'rgba(0, 113, 227, 0.08)' }  // 清晰前景
     ];
 
     const observer = new IntersectionObserver((entries) => {
