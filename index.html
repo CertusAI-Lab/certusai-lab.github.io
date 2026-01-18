@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.0.6">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.0.7">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -55,19 +55,25 @@
 </nav>
 
 <section class="hero is-pro-max">
+  <div class="hero-3d-island" id="nano-hero-asset">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 20C55.8 20 20 55.8 20 100C20 144.2 55.8 180 100 180C144.2 180 180 144.2 180 100C180 55.8 144.2 20 100 20ZM100 160C66.9 160 40 133.1 40 100C40 66.9 66.9 40 100 40C133.1 40 160 66.9 160 100C160 133.1 133.1 160 100 160Z" fill="#0071E3" fill-opacity="0.1"/>
+      <path d="M100 60L125 110L100 135L75 110L100 60Z" stroke="#0071E3" stroke-width="2" stroke-linejoin="round"/>
+      <rect x="95" y="55" width="10" height="10" rx="2" fill="#0071E3"/>
+    </svg>
+  </div>
   <div class="hero-body">
     <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <div class="hero-icon-blob"></div>
-          <h1 class="title is-1 streamer-text" style="font-size: 3.5rem; margin-bottom: 1.5rem; color: #1d1d1f;">
-            定义法律智能的安全边界
+      <div class="columns">
+        <div class="column is-7" style="text-align: left;">
+          <h1 class="title is-1 streamer-text" style="font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; color: #1d1d1f;">
+            定义法律智能的<br>安全边界
           </h1>
-          <p class="subtitle is-4" style="color: #86868b; margin-bottom: 2.5rem; font-weight: 400;">
+          <p class="subtitle is-4" style="color: #86868b; margin-bottom: 3rem; font-weight: 400; max-width: 500px;">
             Certus AI (确信科技) —— 国内领先的法律大模型安全评估专家
           </p>
           
-          <div class="buttons is-centered">
+          <div class="buttons">
             <span class="link-block">
               <a href="https://modelscope.cn/datasets/CertusAI/..."
                  class="button is-dark pro-btn is-rounded">
@@ -92,12 +98,13 @@
 <!-- Content sections cleared -->
 
 
-<section class="section" style="padding-top: 4rem;">
+<section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-10">
-        <div class="glass-card" style="margin-bottom: 2rem;">
-          <h2 class="title is-3" style="color: #1d1d1f;"><i class="fas fa-info-circle" style="color: var(--primary); margin-right: 15px;"></i>关于我们</h2>
+        <div class="glass-card">
+          <div class="nano-3d-chip"><i class="fas fa-fingerprint"></i></div>
+          <h2 class="title is-3" style="color: #1d1d1f; margin-bottom: 1.5rem;">关于我们</h2>
           <div class="content is-size-5" style="color: var(--text-dim); line-height: 1.8;">
             <p>
               Certus AI (确信科技) 是国内首家专注于法律大模型安全边界的第三方评估机构。我们致力于为 AI 与法律的深度融合提供安全锚点，确保智能合规，防范算法偏差。
@@ -115,43 +122,42 @@
 <section class="section" id="expertise">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
-      <div class="column is-10">
-
-          <h2 class="title is-2 has-text-centered" style="color: #1d1d1f; margin-bottom: 4rem;">核心技术：L7 评测框架</h2>
+      <div class="column is-12">
+          <h2 class="title is-2 has-text-centered" style="color: #1d1d1f; margin-bottom: 5rem;">核心技术：L7 评测框架</h2>
           <div class="columns is-multiline">
-            <div class="column is-6">
+            <div class="column is-3">
               <div class="glass-card" style="height: 100%;">
-                <div class="icon-box"><i class="fas fa-balance-scale"></i></div>
+                <div class="nano-3d-chip">01</div>
                 <span class="l7-level">Level 1</span>
-                <h3 class="title is-4" style="color: #1d1d1f;">合规性评估</h3>
-                <p style="color: var(--text-dim);">基础法律法规与监管对齐，确保模型输出不触碰红线。</p>
+                <h3 class="title is-5" style="color: #1d1d1f;">合规性评估</h3>
+                <p style="color: var(--text-dim); font-size: 0.95rem;">基础法律法规与监管对齐。</p>
               </div>
             </div>
-            <div class="column is-6">
+            <div class="column is-3">
               <div class="glass-card" style="height: 100%;">
-                <div class="icon-box"><i class="fas fa-microchip"></i></div>
+                <div class="nano-3d-chip">03</div>
                 <span class="l7-level">Level 3</span>
-                <h3 class="title is-4" style="color: #1d1d1f;">忠实度检测</h3>
-                <p style="color: var(--text-dim);">利用自研算法检测法律援引中的 hallucination (幻觉) 问题，确保引据有法可依。</p>
+                <h3 class="title is-5" style="color: #1d1d1f;">忠实度检测</h3>
+                <p style="color: var(--text-dim); font-size: 0.95rem;">检测法律援引中的幻觉问题。</p>
               </div>
             </div>
-            <div class="column is-6">
+            <div class="column is-3">
               <div class="glass-card" style="height: 100%;">
-                <div class="icon-box"><i class="fas fa-brain"></i></div>
+                <div class="nano-3d-chip">05</div>
                 <span class="l7-level">Level 5</span>
-                <h3 class="title is-4" style="color: #1d1d1f;">逻辑性推理</h3>
-                <p style="color: var(--text-dim);">识别复杂长案件中的深度逻辑陷阱，验证模型在非线性案件中的理解深度。</p>
+                <h3 class="title is-5" style="color: #1d1d1f;">逻辑性推理</h3>
+                <p style="color: var(--text-dim); font-size: 0.95rem;">识别复杂长案件中的深度陷阱。</p>
               </div>
             </div>
-            <div class="column is-6">
+            <div class="column is-3">
               <div class="glass-card" style="height: 100%;">
-                <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+                <div class="nano-3d-chip">07</div>
                 <span class="l7-level">Level 7</span>
-                <h3 class="title is-4" style="color: #1d1d1f;">安全性防护</h3>
-                <p style="color: var(--text-dim);">前沿级对抗测试，全面防御提示词注入、角色扮演导致的 Jailbreak (越狱) 攻击。</p>
+                <h3 class="title is-5" style="color: #1d1d1f;">安全性防护</h3>
+                <p style="color: var(--text-dim); font-size: 0.95rem;">前沿级对抗测试，防御注入。</p>
               </div>
             </div>
-        </div>
+          </div>
       </div>
     </div>
   </div>
