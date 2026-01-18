@@ -80,20 +80,34 @@ body {
   padding: 8px 16px !important;
 }
 
-/* Hero 区域 */
+/* Hero 区域增强 */
 .hero.is-pro-max {
-  min-height: 80vh;
+  min-height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  background: var(--bg-white);
+  background: radial-gradient(circle at 80% 20%, rgba(0, 113, 227, 0.05) 0%, #ffffff 100%);
   padding-top: 52px;
+  overflow: hidden;
+}
+
+.hero-icon-blob {
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.08) 0%, transparent 70%);
+  filter: blur(60px);
+  z-index: 0;
 }
 
 .hero-body {
   padding: 3rem 1.5rem;
   animation: fade-in-up 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  z-index: 1;
 }
 
 .streamer-text {
@@ -102,6 +116,27 @@ body {
   -webkit-text-fill-color: initial;
   font-weight: 700 !important;
   letter-spacing: -0.02em;
+}
+
+/* 业务图标样式 */
+.icon-box {
+  width: 48px;
+  height: 48px;
+  background: #f5f5f7;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover .icon-box {
+  background: var(--primary);
+  color: #fff;
+  transform: rotate(5deg) scale(1.1);
 }
 
 /* 卡片与间距修复 */
