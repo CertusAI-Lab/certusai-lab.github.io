@@ -1,4 +1,4 @@
-# body {
+body {
   font-family: 'Inter', 'Noto Sans SC', sans-serif;
   background-color: #050507;
   color: #e0e0e0;
@@ -88,6 +88,7 @@
   background: linear-gradient(90deg, #fff, #0071e3, #bf5af2, #fff);
   background-size: 200% auto;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: fluid-bg 5s linear infinite;
   font-weight: 800 !important;
