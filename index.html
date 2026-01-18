@@ -44,77 +44,52 @@
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
+    <a class="navbar-item" href="/">
+      <strong style="font-size: 1.5rem; letter-spacing: -1px;">Certus AI</strong>
     </a>
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
+      <a class="navbar-item" href="/">门户首页</a>
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          核心业务
-        </a>
+        <a class="navbar-link">核心业务</a>
         <div class="navbar-dropdown">
-          <a class="navbar-item" href="#expertise">
-            L7 评测框架
-          </a>
-          <a class="navbar-item" href="mailto:business@certusai.cn">
-            安全咨询
-          </a>
+          <a class="navbar-item" href="#expertise">L7 评测框架</a>
+          <a class="navbar-item" href="mailto:business@certusai.cn">安全咨询服务</a>
         </div>
       </div>
     </div>
-
   </div>
 </nav>
 
-
-<section class="hero">
+<section class="hero is-pro-max">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Certus AI: 定义法律智能的安全边界</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="#">Certus AI 团队</a><sup>1</sup>
+          <h1 class="title is-1 streamer-text" style="font-size: 4rem; margin-bottom: 2rem;">
+            定义法律智能的安全边界
+          </h1>
+          <p class="subtitle is-4" style="color: var(--text-dim); margin-bottom: 3rem;">
+            Certus AI (确信科技) —— 国内领先的法律大模型安全评估专家
+          </p>
+          
+          <div class="buttons is-centered">
+            <span class="link-block">
+              <a href="https://modelscope.cn/datasets/CertusAI/..."
+                 class="button is-dark pro-btn is-rounded is-large">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>ModelScope 数据集</span>
+              </a>
             </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Certus AI (确信科技), 深圳</span>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <span class="link-block">
-                <a href="https://modelscope.cn/datasets/CertusAI/..."
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>ModelScope 数据集</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="mailto:business@certusai.cn"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-envelope"></i>
-                  </span>
-                  <span>联系商务</span>
-                </a>
-              </span>
-            </div>
-
+            <span class="link-block" style="margin-left: 1rem;">
+              <a href="mailto:business@certusai.cn"
+                 class="button is-white is-outlined is-rounded is-large" 
+                 style="border-width: 2px; font-weight: 600;">
+                <span class="icon"><i class="far fa-envelope"></i></span>
+                <span>联系商务合作</span>
+              </a>
+            </span>
           </div>
         </div>
       </div>
@@ -125,42 +100,57 @@
 <!-- Content sections cleared -->
 
 
-<section class="section">
+<section class="section" style="padding-top: 8rem;">
   <div class="container is-max-desktop">
-    <!-- 关于我们. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">关于我们</h2>
-        <div class="content has-text-justified">
-          <p>
-            Certus AI (确信科技) 是国内首家专注于法律大模型安全边界的第三方评估机构。
-          </p>
-          <p>
-            我们提出了 <strong>L7 对抗性评估框架</strong>，涵盖了从基础合规化（Level 1）到深度逻辑陷阱（Level 5）以及提示词注入攻击（Level 7）的全方位风险评估。
-          </p>
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="glass-card" style="margin-bottom: 6rem;">
+          <h2 class="title is-3" style="color: #fff;">关于我们</h2>
+          <div class="content is-size-5" style="color: var(--text-dim); line-height: 1.8;">
+            <p>
+              Certus AI (确信科技) 是国内首家专注于法律大模型安全边界的第三方评估机构。我们致力于为 AI 与法律的深度融合提供安全锚点，确保智能合规，防范算法偏差。
+            </p>
+            <p>
+              我们提出了 <strong>L7 对抗性评估框架</strong>，涵盖了从基础合规化到高阶安全性的全方位风险评估体系。
+            </p>
+          </div>
         </div>
-      </div>
-    </div>
-    <!--/ 关于我们. -->
 
-    <!-- 核心技术. -->
-    <div id="expertise" class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">核心技术：L7 评测框架</h2>
-        <div class="content has-text-justified">
-          <p>
-            Certus AI 凭借自主研发的 <strong>L7 对抗性评估框架</strong> 树立了行业标准。我们从七个关键维度对法律大模型进行评估：
-          </p>
-          <ul>
-            <li><strong>Level 1: 合规性</strong> - 基础法律法规与监管对齐。</li>
-            <li><strong>Level 3: 忠实度</strong> - 检测法律援引中的幻觉问题。</li>
-            <li><strong>Level 5: 逻辑性</strong> - 识别复杂案件中的深度逻辑陷阱。</li>
-            <li><strong>Level 7: 安全性</strong> - 防御提示词注入与越狱攻击。</li>
-          </ul>
+        <div id="expertise">
+          <h2 class="title is-2 has-text-centered" style="color: #fff; margin-bottom: 4rem;">核心技术：L7 评测框架</h2>
+          <div class="columns is-multiline">
+            <div class="column is-6">
+              <div class="glass-card">
+                <span class="l7-level">Level 1</span>
+                <h3 class="title is-4" style="color: #fff;">合规性评估</h3>
+                <p style="color: var(--text-dim);">基础法律法规与监管对齐，确保模型输出不触碰红线。</p>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="glass-card">
+                <span class="l7-level">Level 3</span>
+                <h3 class="title is-4" style="color: #fff;">忠实度检测</h3>
+                <p style="color: var(--text-dim);">利用自研算法检测法律援引中的 hallucination (幻觉) 问题，确保引据有法可依。</p>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="glass-card">
+                <span class="l7-level">Level 5</span>
+                <h3 class="title is-4" style="color: #fff;">逻辑性推理</h3>
+                <p style="color: var(--text-dim);">识别复杂长案件中的深度逻辑陷阱，验证模型在非线性案件中的理解深度。</p>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="glass-card">
+                <span class="l7-level">Level 7</span>
+                <h3 class="title is-4" style="color: #fff;">安全性防护</h3>
+                <p style="color: var(--text-dim);">前沿级对抗测试，全面防御提示词注入、角色扮演导致的 Jailbreak (越狱) 攻击。</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!--/ 核心技术. -->
   </div>
 </section>
 
