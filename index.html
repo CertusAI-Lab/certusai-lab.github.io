@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.2.13">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.2.14">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -312,15 +312,22 @@
       for (let y = 0; y < height; y += skip) {
         for (let x = 0; x < width; x += skip) {
           const i = (y * width + x) * 4;
-          if (imgData[i+3] > 40) {
+          const r = imgData[i], g = imgData[i+1], b = imgData[i+2], a = imgData[i+3];
+          
+          // 过滤灰色像素：灰色的 R≈G≈B 且差异小于30
+          const isGray = Math.abs(r - g) < 30 && Math.abs(g - b) < 30 && Math.abs(r - b) < 30;
+          const isBright = (r + g + b) / 3 > 100; // 亮度较高的灰色区域
+          
+          // 只保留有明显颜色差异的像素（蓝色球体和文字）
+          if (a > 40 && !(isGray && isBright)) {
             particles.push({
               x: x + (Math.random() - 0.5) * 5, 
               y: y + (Math.random() - 0.5) * 5,
               baseX: x, baseY: y,
               vx: 0, vy: 0,
               size: Math.random() * 1 + 1,
-              r: imgData[i], g: imgData[i+1], b: imgData[i+2],
-              a: (imgData[i+3] / 255) * 0.8
+              r: r, g: g, b: b,
+              a: (a / 255) * 0.8
             });
           }
         }
