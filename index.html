@@ -184,6 +184,83 @@
   <canvas id="brand-canvas"></canvas>
 </section>
 
+<!-- Hero 科技网络粒子系统 -->
+<script>
+  (function() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    const dpr = window.devicePixelRatio || 1;
+    
+    // 科技蓝参数
+    const config = {
+      count: 60,
+      color: '#0071e3',  
+      dist: 120,
+      speed: 0.4
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) animate();
+    });
+    observer.observe(canvas);
+    
+    init();
+    window.addEventListener('resize', init);
+
+    function init() {
+      const rect = canvas.parentNode.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      
+      particles = [];
+      for(let i=0; i<config.count; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * config.speed,
+          vy: (Math.random() - 0.5) * config.speed,
+          size: Math.random() * 2 + 1
+        });
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for(let i=0; i<particles.length; i++) {
+        let p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        if(p.x < 0 || p.x > width) p.vx *= -1;
+        if(p.y < 0 || p.y > height) p.vy *= -1;
+        
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(0, 113, 227, 0.4)`;
+        ctx.fill();
+        
+        for(let j=i+1; j<particles.length; j++) {
+          let p2 = particles[j];
+          let dist = Math.sqrt((p.x-p2.x)**2 + (p.y-p2.y)**2);
+          if(dist < config.dist) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(0, 113, 227, ${0.15 * (1 - dist/config.dist)})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+  })();
+</script>
+
 <script>
   (function() {
     const canvas = document.getElementById('brand-canvas');
