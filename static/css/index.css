@@ -210,11 +210,11 @@ body {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
 }
 
-/* 高阶交互实验室 (Pure Particle Style) */
+/* 高阶交互实验室 (Refined Particle Art) */
 .brand-interactive-lab {
   position: relative;
   width: 100%;
-  height: 120px; /* 压缩为一行文字高度 */
+  height: 140px; /* 固定高度，防止拉伸 */
   background: #ffffff;
   overflow: hidden;
   display: flex;
@@ -225,11 +225,10 @@ body {
 }
 
 #brand-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: block;
   width: 100%;
   height: 100%;
+  touch-action: none;
 }
 
 .glitch-text::before,
