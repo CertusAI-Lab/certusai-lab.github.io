@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.2.15">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.2.16">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -295,11 +295,11 @@
       tCanvas.height = height;
       
       const logoAspect = logoImg.width / logoImg.height;
-      let targetH = height * 0.7; // 独立展示，高度占比 70% 比较舒展
-      let targetW = targetH * logoAspect;
-      if (targetW > width * 0.8) {
-          targetW = width * 0.8;
-          targetH = targetW / logoAspect;
+      let targetW = width * 0.95; // 铺满屏幕宽度
+      let targetH = targetW / logoAspect;
+      if (targetH > height * 0.9) {
+          targetH = height * 0.9;
+          targetW = targetH * logoAspect;
       }
       
       const drawX = (width - targetW) / 2; 
