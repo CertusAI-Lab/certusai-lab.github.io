@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=1.1.17">
+  <link rel="stylesheet" href="./static/css/index.css?v=1.1.18">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -108,12 +108,12 @@
           <!-- 点阵 Logo 动态背景层 -->
           <canvas id="brand-canvas"></canvas>
           
-          <div class="card-content-overlay" style="padding: 2rem;">
-            <div class="columns is-vcentered">
-              <div class="column is-6">
-                <div class="nano-3d-chip"><i class="fas fa-info-circle"></i></div>
-                <h2 class="title is-3" style="color: #1d1d1f; margin-bottom: 1.5rem;">关于我们</h2>
-                <div class="content is-size-5" style="color: var(--text-main); line-height: 1.6;">
+          <div class="card-content-overlay" style="padding: 3rem;">
+            <div class="columns is-centered">
+              <div class="column is-9" style="background: rgba(255,255,255,0.65); backdrop-filter: blur(12px); border-radius: 24px; padding: 2.5rem; border: 1px solid rgba(255,255,255,0.3);">
+                <div class="nano-3d-chip" style="margin: 0 auto 1.5rem;"><i class="fas fa-info-circle"></i></div>
+                <h2 class="title is-3" style="color: #1d1d1f; margin-bottom: 2rem;">关于我们</h2>
+                <div class="content is-size-5" style="color: var(--text-main); line-height: 1.8;">
                   <p>
                     Certus AI (确信科技) 是国内首家专注于法律大模型安全边界的第三方评估机构。我们致力于为 AI 与法律的深度融合提供安全锚点，确保智能合规，防范算法偏差。
                   </p>
@@ -222,19 +222,19 @@
       tCanvas.height = height;
       
       const logoAspect = logoImg.width / logoImg.height;
-      let targetH = height * 0.7;
+      let targetH = height * 0.75;
       let targetW = targetH * logoAspect;
-      if (targetW > width * 0.6) {
-          targetW = width * 0.6;
+      if (targetW > width * 0.7) {
+          targetW = width * 0.7;
           targetH = targetW / logoAspect;
       }
       
-      const drawX = (width - targetW) / 2 + (width > 800 ? width * 0.15 : 0);
+      const drawX = (width - targetW) / 2; // 完美的物理居中
       const drawY = (height - targetH) / 2;
       
       tCtx.drawImage(logoImg, drawX, drawY, targetW, targetH);
       const imgData = tCtx.getImageData(0, 0, width, height).data;
-      const skip = 3; // 平滑采样
+      const skip = 3; 
       
       for (let y = 0; y < height; y += skip) {
         for (let x = 0; x < width; x += skip) {
