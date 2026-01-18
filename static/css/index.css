@@ -213,11 +213,11 @@ body {
 /* 高阶交互实验室 (Independent Finale) */
 .brand-interactive-lab {
   position: relative;
-  width: 90%;
-  max-width: 600px;
-  height: 220px;
-  margin: 0 auto 0; /* 底部完全无留白，真正的页脚 */
-  background: transparent;
+  width: 100%;
+  max-width: 100%;
+  height: 250px;
+  margin: 0;
+  background: #1d1d1f; /* 深色背景 */
   overflow: hidden;
   display: flex;
   align-items: center;
