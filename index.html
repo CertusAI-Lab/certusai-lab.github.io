@@ -190,21 +190,27 @@
     const ctx = canvas.getContext('2d');
     let width, height, particles = [];
     const dpr = window.devicePixelRatio || 1;
-    let mouse = { x: -1000, y: -1000, radius: 100 };
+    let mouse = { x: -1000, y: -1000, radius: 150 };
+    let isActive = false;
 
     const logoImg = new Image();
     logoImg.src = "./static/images/certusai.png";
     logoImg.onload = () => {
         init();
-        animate();
-        window.addEventListener('resize', () => { setTimeout(init, 100); });
+        // 性能核心：仅在视口内运行时才激活
+        const obs = new IntersectionObserver(entries => {
+            isActive = entries[0].isIntersecting;
+            if (isActive) animate();
+        }, { threshold: 0.1 });
+        obs.observe(canvas);
+        
+        window.addEventListener('resize', () => { setTimeout(init, 150); });
     };
 
     function init() {
       const parent = canvas.parentNode;
       width = parent.clientWidth;
       height = parent.clientHeight;
-      
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -216,45 +222,38 @@
       tCanvas.height = height;
       
       const logoAspect = logoImg.width / logoImg.height;
-      // 保持Logo原有比例，适当缩放
       let targetH = height * 0.7;
       let targetW = targetH * logoAspect;
-      
       if (targetW > width * 0.6) {
           targetW = width * 0.6;
           targetH = targetW / logoAspect;
       }
       
-      const drawX = (width - targetW) / 2 + width * 0.2; // 右移避开文案
+      const drawX = (width - targetW) / 2 + (width > 800 ? width * 0.15 : 0);
       const drawY = (height - targetH) / 2;
       
       tCtx.drawImage(logoImg, drawX, drawY, targetW, targetH);
       const imgData = tCtx.getImageData(0, 0, width, height).data;
-      const skip = 2; // 更密集的采样
+      const skip = 3; // 平滑采样
       
       for (let y = 0; y < height; y += skip) {
         for (let x = 0; x < width; x += skip) {
           const i = (y * width + x) * 4;
-          const r = imgData[i];
-          const g = imgData[i + 1];
-          const b = imgData[i + 2];
-          const alpha = imgData[i + 3];
-          if (alpha > 30) {
+          if (imgData[i+3] > 40) {
             particles.push({
-              x: x + (Math.random() - 0.5) * 2, 
-              y: y + (Math.random() - 0.5) * 2,
+              x: x + (Math.random() - 0.5) * 5, 
+              y: y + (Math.random() - 0.5) * 5,
               baseX: x, baseY: y,
               vx: 0, vy: 0,
-              size: Math.random() * 0.8 + 0.8, // 更小的粒子
-              r: r, g: g, b: b,
-              a: (alpha / 255) * 0.85 // 更高透明度
+              size: Math.random() * 1 + 1,
+              r: imgData[i], g: imgData[i+1], b: imgData[i+2],
+              a: (imgData[i+3] / 255) * 0.8
             });
           }
         }
       }
     }
 
-    // 监听全页鼠标，使交互更同步
     window.addEventListener('mousemove', e => {
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
@@ -262,35 +261,37 @@
     });
 
     function animate() {
+      if (!isActive) return;
       ctx.clearRect(0, 0, width, height);
       const time = Date.now() * 0.001;
       
-      particles.forEach(p => {
-        let dx = mouse.x - p.x;
-        let dy = mouse.y - p.y;
-        let dist = Math.sqrt(dx*dx + dy*dy);
+      for (let i = 0, len = particles.length; i < len; i++) {
+        const p = particles[i];
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const distSq = dx*dx + dy*dy;
         
-        if (dist < mouse.radius) {
+        if (distSq < mouse.radius * mouse.radius) {
+          const dist = Math.sqrt(distSq);
           const force = (mouse.radius - dist) / mouse.radius;
-          const angle = Math.atan2(dy, dx);
-          p.vx -= Math.cos(angle) * force * 1.8;
-          p.vy -= Math.sin(angle) * force * 1.8;
+          // 高效向量排除：避免 Math.atan2/cos/sin
+          p.vx -= (dx / dist) * force * 2.5;
+          p.vy -= (dy / dist) * force * 2.5;
         }
         
         p.vx += (p.baseX - p.x) * 0.08;
         p.vy += (p.baseY - p.y) * 0.08;
-        p.vx *= 0.88;
-        p.vy *= 0.88;
+        p.vx *= 0.86;
+        p.vy *= 0.86;
         p.x += p.vx;
         p.y += p.vy;
         
-        const jitter = Math.sin(time + p.baseX) * 0.25;
+        const jitter = Math.sin(time + p.baseX * 0.1) * 0.2;
         ctx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.a})`;
         ctx.beginPath();
-        ctx.arc(p.x, p.y + jitter, p.size, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y + jitter, p.size, 0, 6.29); 
         ctx.fill();
-      });
-      
+      }
       requestAnimationFrame(animate);
     }
   })();
