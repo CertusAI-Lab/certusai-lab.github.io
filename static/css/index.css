@@ -216,7 +216,7 @@ body {
   width: 90%;
   max-width: 600px;
   height: 220px;
-  margin: 0 auto 1rem; /* 紧贴 Footer，底部留少许空隙 */
+  margin: 0 auto 2rem; /* 顶部无间距紧贴文字，底部留白 */
   background: transparent;
   overflow: hidden;
   display: flex;
