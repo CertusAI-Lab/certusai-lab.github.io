@@ -370,6 +370,10 @@ body {
   min-height: 64px !important;
 }
 
+.navbar-brand .navbar-item img {
+  max-height: 40px !important; /* PC端保持 40px，舒适不拥挤 */
+}
+
 .navbar-burger {
   height: 64px !important;
   width: 64px !important;
@@ -380,5 +384,16 @@ body {
     background: #ffffff !important;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     padding: 1rem 0;
+  }
+  .navbar-brand .navbar-item img {
+    max-height: 32px !important; /* 手机端进一步减小高度以防溢出 */
+  }
+  .navbar, .navbar-brand {
+    height: 56px !important; /* 手机端导航栏稍矮一些，更精致 */
+    min-height: 56px !important;
+  }
+  .navbar-burger {
+    height: 56px !important;
+    width: 56px !important;
   }
 }
