@@ -34,7 +34,7 @@ body {
   width: 100%;
   top: 0;
   z-index: 1000;
-  height: 52px;
+  height: 64px;
 }
 
 .navbar-item {
@@ -88,7 +88,7 @@ body {
   justify-content: center;
   position: relative;
   background: radial-gradient(circle at 80% 20%, rgba(0, 113, 227, 0.05) 0%, #ffffff 100%);
-  padding-top: 52px;
+  padding-top: 64px;
   overflow: hidden;
 }
 
@@ -363,4 +363,22 @@ body {
   box-shadow: 0 6px 16px rgba(255, 210, 30, 0.4) !important;
   transform: translateY(-2px);
   cursor: pointer;
+}
+
+/* 导航栏对齐优化 */
+.navbar-brand, .navbar-brand .navbar-item {
+  min-height: 64px !important;
+}
+
+.navbar-burger {
+  height: 64px !important;
+  width: 64px !important;
+}
+
+@media screen and (max-width: 1023px) {
+  .navbar-menu {
+    background: #ffffff !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+  }
 }
