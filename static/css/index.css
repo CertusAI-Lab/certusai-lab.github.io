@@ -372,6 +372,7 @@ body {
 
 .navbar-brand .navbar-item img {
   max-height: 40px !important; /* PC端保持 40px，舒适不拥挤 */
+  mix-blend-mode: multiply !important; /* 强制消除自带的白底 */
 }
 
 .navbar-burger {
